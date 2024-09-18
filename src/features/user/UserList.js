@@ -1,8 +1,12 @@
-import { useDispatch, useSelector } from "react-redux";
-import { add, selectUsers } from "./userSlice";
+import { useNavigate, Routes, Route } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { selectUsers, remove } from "./userSlice";
+import UserEdit from "./UserEdit";
 
 export default function UserList () {
+    const navigate = useNavigate();
     const users = useSelector(selectUsers);
+
     const dispatch = useDispatch();
 
     return (
@@ -32,20 +36,25 @@ export default function UserList () {
                                                 <td className="whitespace-nowrap px-6 py-4">{user.username}</td>
                                                 <td className="whitespace-nowrap px-6 py-4">{user.email}</td>
                                                 <td className="whitespace-nowrap px-6 py-4">
-                                                    <span className="text-blue-300 px-2">
+                                                    <span onClick={() => navigate(`/user/${user.id}`)} className="text-blue-300 px-2">
                                                         Edit
                                                     </span>
                                                     |
-                                                    <span className="text-red-300 px-2">
+                                                    <span onClick={() => {
+                                                        dispatch(remove(user.id))
+                                                    }} className="text-red-300 px-2">
                                                         Delete
                                                     </span>
                                                 </td>
                                             </tr>
                                         )
-                                    } )
+                                    })
                                 }
                             </tbody>
                             </table>
+                            <Routes>
+                                <Route path="/user/:name" element={<UserEdit />} />
+                            </Routes>
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,7 @@
 import { Routes, Route, NavLink } from "react-router-dom"
 import Todos from "./features/todos/Todos"
 import User from "./features/user/User"
+import UserEdit from "./features/user/UserEdit"
 
 export default function App(){
     return (
@@ -20,6 +21,7 @@ export default function App(){
                <Routes>
                     <Route path="/todos" element={<Todos/>} />
                     <Route path="/user" element={<User/>} />
+                    <Route path="/user/:id" element={<UserEdit/>} />
                </Routes>
             </div>
         </div>

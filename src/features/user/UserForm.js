@@ -20,7 +20,7 @@ export default function UserForm({onCancel}) {
                     e.preventDefault();
 
                     dispatch(add({
-                        id: users[users.length - 1].id + 1,
+                        id: users.length ? users[users.length - 1].id + 1 : 1,
                         name: nameRef.current.value,
                         username: usernameRef.current.value,
                         email: emailRef.current.value,

@@ -10,12 +10,19 @@ const userSlice = createSlice({
         add: (state, action) => {
             return [ ...state, action.payload ]
         },
-        delete: (state, action) => {
+        edit: (state, action) => {
+            const { id, updatedUser } = action.payload;
+            const index = state.findIndex(user => user.id === id);
+            if(index !== -1){
+                state[index] = {...state[index], ...updatedUser}
+            }
+        },
+        remove: (state, action) => {
             return state.filter(item=>item.id !== action.payload);
         }
     }
 });
 
 export const selectUsers = (state) => state.users;
-export const { add, remove } = userSlice.actions;
+export const { add, edit, remove } = userSlice.actions;
 export default userSlice.reducer;
